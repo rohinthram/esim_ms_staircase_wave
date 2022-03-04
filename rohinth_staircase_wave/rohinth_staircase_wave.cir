@@ -1,0 +1,27 @@
+* R:\esim_simulations\mixed_signal_hackathon\rohinth_staircase_wave\rohinth_staircase_wave.cir
+
+* EESchema Netlist Version 1.1 (Spice format) creation date: 03/04/22 22:44:38
+
+* To exclude a component from the Spice Netlist add [Spice_Netlist_Enabled] user FIELD set to: N
+* To reorder the component spice node sequence add [Spice_Node_Sequence] user FIELD and define sequence: 2,1,0
+
+* Sheet Name: /
+v1  Net-_U2-Pad1_ GND pulse		
+U1  Net-_U1-Pad1_ Net-_U1-Pad2_ Net-_U1-Pad3_ Net-_U1-Pad4_ Net-_U1-Pad5_ rohinth_staircase_logic		
+U2  Net-_U2-Pad1_ Net-_U1-Pad1_ adc_bridge_1		
+U3  Net-_U1-Pad2_ Net-_U1-Pad3_ Net-_U1-Pad4_ Net-_U1-Pad5_ Net-_R1-Pad1_ Net-_R2-Pad1_ Net-_R3-Pad1_ Net-_R4-Pad1_ dac_bridge_4		
+X1  ? Net-_R1-Pad2_ GND vss ? out_int vdd ? lm_741		
+R1  Net-_R1-Pad1_ Net-_R1-Pad2_ 10k		
+R2  Net-_R2-Pad1_ Net-_R1-Pad2_ 10k		
+R3  Net-_R3-Pad1_ Net-_R1-Pad2_ 10k		
+R4  Net-_R4-Pad1_ Net-_R1-Pad2_ 10k		
+R5  Net-_R1-Pad2_ out_int 1k		
+v2  vdd GND DC		
+v3  GND vss DC		
+U4  out_int plot_v1		
+X2  ? Net-_R6-Pad2_ GND vss ? out vdd ? lm_741		
+R6  out_int Net-_R6-Pad2_ 1k		
+R7  Net-_R6-Pad2_ out 1k		
+U5  out plot_v1		
+
+.end

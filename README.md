@@ -15,7 +15,9 @@ This repository presents a report for the *Mixed Signal Circuit Design and Simul
 - [Introduction](#introduction)
 - [Description](#description)
 - [Tools Used](#tools-used)
+- [Run this project](#run-this-project)
 - [Schematic](#schematic)
+- [Makerchip](#makerchip)
 - [Netlist](#netlist)
 - [Output Waveform](#output-waveform)
 - [Acknowlegements](#acknowledgements)
@@ -38,13 +40,56 @@ Staircase Waveform circuit is built using a digital logic block with output 0001
     - Makerchip - Online  IDE for Verilog System-verilog/TL-Verilog Simulation.
     - Verilator - Conversion of Verilog code to C++ Objects
 
+# Run this project
+1. Clone this repository locally 
+```
+git clone https://github.com/rohinthram/esim_ms_staircase_wave.git
+```
+2. Go to *rohinth_staricase_wave* directory
+```
+cd rohinth_staircase_wave
+```
+3. Run NgSpice
+```
+ngspice rohinth_staircase_wave.cir.out
+```
+
+> **Note**: To work with eSim, open this folder *rohinth_staircase_wave* as project in eSim
+
+
 # Schematic
 > Circuit Designed using KiCad
-![]()
+![schematic](assets/staircase_wave_ckt.png)
+
+- The digital block is the *rohinth_staircase_logic* which is built using the following verilog code
+```verilog
+module rohinth_staircase_logic(input clk,
+			output reg[3:0] val);
+
+	always @ (posedge clk) begin
+		if(val[3] == 1)
+			val <= 0;
+		else
+			val <= val + val + 1;
+   	end
+
+endmodule
+```
+
+- The analog block here is the two operational amplifiers, one adds all the digital output, the other inverts the output from the first opamp to give proper staircase output
+
+# Makerchip
+- The following is the code that is fed to the makerchip IDE
+![makerchip_code](assets/makerchip_code_2.png)
+- The waveform for the above code is obtained as
+![makerchip_waveform](assets/makerchip_waveform.png)
+
 
 # Netlist
 - Netlist generated from KiCad to NgSpice Converter, which is sourced to NgSpice for simulation
 ```
+* r:\esim_simulations\mixed_signal_hackathon\rohinth_staircase_wave\rohinth_staircase_wave.cir
+
 .include lm_741.sub
 v1  net-_u2-pad1_ gnd pulse(0 5 1m 1m 1m 0.5 1)
 * u1  net-_u1-pad1_ net-_u1-pad2_ net-_u1-pad3_ net-_u1-pad4_ net-_u1-pad5_ rohinth_staircase_logic
@@ -79,25 +124,29 @@ a3 [net-_u1-pad2_ net-_u1-pad3_ net-_u1-pad4_ net-_u1-pad5_ ] [net-_r1-pad1_ net
 run
 print allv > plot_data_v.txt
 print alli > plot_data_i.txt
+set color0=white;
+set color1=black;
+set color2=red;
+set xbrushwidth=3;
 plot v(out_int)
 plot v(out)
 .endc
 .end
+
 ```
 
 # Output Waveform
-![staircase_wave]()
-
+> The following is the staircase waveform generated from the circuit implemented
+![staircase_wave](assets/staircase_waveform.png)
 
 # Report By
  - R.V.Rohinth Ram
 
 # Acknowledgements
+- FOSSEE, IIT Bombay
+- Steve Hoover, Founder, Redwood EDA
 - Kunal Ghosh, Co-founder, VLSI System Design (VSD) Corp. Pvt. Ltd. - kunalpghosh@gmail.com
-- Sumanto Kar
-- India Institute of Technology Bombay
-
-
+- Sumanto Kar, eSim Team, FOSSEE
 
 # References
 [1] S. Franco, *Design with operational amplifiers and analog integrated
