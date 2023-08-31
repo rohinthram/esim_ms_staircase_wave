@@ -1,4 +1,4 @@
-# Astable Multivibrator using Operational Amplifier
+# Staircase Wave Generation using Analog and Digital Blocks
 
 ![staircase waveform](assets/esim_marathon_banner.png)
 
